@@ -6,9 +6,10 @@ const Button = ({ text, value, setValue }) => {
 
 const StatisticLine = ({ text, value }) => {
   return (
-    <h3>
-      {text} {value}
-    </h3>
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
   );
 };
 
@@ -28,14 +29,16 @@ const App = () => {
       <Button text='bad' value={bad} setValue={setBad} />
       <h1>Statistics</h1>
       {total !== 0 ? (
-        <>
-          <StatisticLine text='good' value={good} />
-          <StatisticLine text='neutral' value={neutral} />
-          <StatisticLine text='bad' value={bad} />
-          <StatisticLine text='all' value={total} />
-          <StatisticLine text='average' value={average} />
-          <StatisticLine text='positive' value={positive} />
-        </>
+        <table>
+          <tbody>
+            <StatisticLine text='good' value={good} />
+            <StatisticLine text='neutral' value={neutral} />
+            <StatisticLine text='bad' value={bad} />
+            <StatisticLine text='all' value={total} />
+            <StatisticLine text='average' value={average} />
+            <StatisticLine text='positive' value={positive} />
+          </tbody>
+        </table>
       ) : (
         <h3>No feedback given</h3>
       )}
