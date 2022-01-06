@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 
-const Statistics = ({ good, neutral, bad }) => {
-  const total = good + neutral + bad;
-  const average = (good * 1 + neutral * 0 + bad * -1) / total || 0;
-  const positive = (good / total) * 100 || 0;
+const Button = ({ text, value, setValue }) => {
+  return <button onClick={() => setValue(value + 1)}>{text}</button>;
+};
+
+const StatisticLine = ({ text, value }) => {
   return (
-    <>
-      <h3>Good {good}</h3>
-      <h3>Neutral {neutral}</h3>
-      <h3>Bad {bad}</h3>
-      <h3>All {total}</h3>
-      <h3>Average {average}</h3>
-      <h3>Positive {positive} %</h3>
-    </>
+    <h3>
+      {text} {value}
+    </h3>
   );
 };
 
@@ -20,16 +16,26 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const total = good + neutral + bad;
+  const average = (good * 1 + neutral * 0 + bad * -1) / total || 0;
+  const positive = (good / total) * 100 + '%' || 0;
 
   return (
     <div>
       <h1>Give feedback</h1>
-      <button onClick={() => setGood(good + 1)}>Good</button>
-      <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
-      <button onClick={() => setBad(bad + 1)}>Bad</button>
+      <Button text='good' value={good} setValue={setGood} />
+      <Button text='neutral' value={neutral} setValue={setNeutral} />
+      <Button text='bad' value={bad} setValue={setBad} />
       <h1>Statistics</h1>
-      {good || neutral || bad !== 0 ? (
-        <Statistics good={good} neutral={neutral} bad={bad} />
+      {total !== 0 ? (
+        <>
+          <StatisticLine text='good' value={good} />
+          <StatisticLine text='neutral' value={neutral} />
+          <StatisticLine text='bad' value={bad} />
+          <StatisticLine text='all' value={total} />
+          <StatisticLine text='average' value={average} />
+          <StatisticLine text='positive' value={positive} />
+        </>
       ) : (
         <h3>No feedback given</h3>
       )}
