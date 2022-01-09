@@ -26,12 +26,25 @@ const App = () => {
     setUpdate(!update);
   };
 
+  const highestNumberOfVotes = Math.max(...copy);
+  const indexOfHighestAnecdote = copy.indexOf(highestNumberOfVotes);
+
   return (
     <>
-      <h1>{anecdotes[selected]}</h1>
-      <h2>has {copy[selected]} votes</h2>
+      <h1>Anecdote of the day</h1>
+      <h2>{anecdotes[selected]}</h2>
+      <h3>has {copy[selected]} votes</h3>
       <button onClick={handleVote}>Vote</button>
       <button onClick={handleClick}>Next anecdote</button>
+      <h1>Anecdote with the most votes</h1>
+      {highestNumberOfVotes !== 0 ? (
+        <div>
+          <h2>{anecdotes[indexOfHighestAnecdote]}</h2>
+          <h3>has {highestNumberOfVotes} votes</h3>
+        </div>
+      ) : (
+        <h2>None has been rated yet</h2>
+      )}
     </>
   );
 };
