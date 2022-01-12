@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Filter from './components/Filter';
+import PersonForm from './components/PersonForm';
+import Persons from './components/Persons';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,63 +14,21 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('');
   const [search, setSearch] = useState('');
 
-  const addPerson = (e) => {
-    e.preventDefault();
-    const addedPerson = {
-      name: newName,
-      number: newNumber,
-    };
-    if (persons.some((e) => e.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
-    } else {
-      setPersons(persons.concat(addedPerson));
-    }
-    setNewName('');
-    setNewNumber('');
-  };
-
-  const handleNewPerson = (e) => {
-    setNewName(e.target.value);
-  };
-
-  const handleNewNumber = (e) => {
-    setNewNumber(e.target.value);
-  };
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value.toLowerCase());
-  };
-
   return (
     <div>
       <h1>Phonebook</h1>
-      <div>
-        filter shown with: <input value={search} onChange={handleSearch} />
-      </div>
-      <form onSubmit={addPerson}>
-        <h2>Add new</h2>
-        <div>
-          name: <input value={newName} onChange={handleNewPerson} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNewNumber} />
-        </div>
-        <div>
-          <button type='submit'>add</button>
-        </div>
-      </form>
+      <Filter search={search} setSearch={setSearch} />
+      <h2>Add new</h2>
+      <PersonForm
+        persons={persons}
+        setPersons={setPersons}
+        newName={newName}
+        setNewName={setNewName}
+        newNumber={newNumber}
+        setNewNumber={setNewNumber}
+      />
       <h1>Numbers</h1>
-      {persons
-        .filter((person) => {
-          return person.name.toLowerCase().includes(search);
-        })
-        .map((person) => {
-          return (
-            <h4 key={person.name}>
-              {person.name} {person.number}
-            </h4>
-          );
-        })}
+      <Persons persons={persons} search={search} />
     </div>
   );
 };
