@@ -51,7 +51,17 @@ const App = () => {
           })
         ) : (
           data.map((country) => {
-            return <h2 key={country.ccn3}>{country.name.common}</h2>;
+            return (
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h2 key={country.ccn3}>{country.name.common}</h2> &nbsp;
+                <button
+                  style={{ height: 30 }}
+                  onClick={() => setSearch(country.name.common)}
+                >
+                  Show
+                </button>
+              </div>
+            );
           })
         )}
       </div>
