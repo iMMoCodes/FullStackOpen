@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import personService from '../services/persons';
 
 const PersonForm = ({
