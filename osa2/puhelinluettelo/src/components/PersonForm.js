@@ -8,6 +8,7 @@ const PersonForm = ({
   setNewName,
   newNumber,
   setNewNumber,
+  setNotificationMessage,
 }) => {
   const addPerson = (e) => {
     e.preventDefault();
@@ -25,10 +26,18 @@ const PersonForm = ({
           persons.filter((person) => person.name === newName)[0].id,
           addedPerson
         );
+        setNotificationMessage(`Updated ${addedPerson.name}`);
+        setTimeout(() => {
+          setNotificationMessage(null);
+        }, 2000);
       }
     } else {
       personService.create(addedPerson).then((response) => {
         setPersons(persons.concat(response.data));
+        setNotificationMessage(`Added ${response.data.name}`);
+        setTimeout(() => {
+          setNotificationMessage(null);
+        }, 2000);
       });
     }
     setNewName('');

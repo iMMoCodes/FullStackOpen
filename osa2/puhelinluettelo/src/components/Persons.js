@@ -1,10 +1,14 @@
 import React from 'react';
 import personService from '../services/persons';
 
-const Persons = ({ persons, search }) => {
+const Persons = ({ persons, search, setNotificationMessage }) => {
   const handleDelete = (person) => {
     if (window.confirm(`Delete ${person.name}?`)) {
       personService.deletePerson(person.id);
+      setNotificationMessage(`Deleted ${person.name}`);
+      setTimeout(() => {
+        setNotificationMessage(null);
+      }, 2000);
     }
   };
 
