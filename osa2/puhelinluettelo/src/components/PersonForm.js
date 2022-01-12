@@ -22,10 +22,19 @@ const PersonForm = ({
           `${newName} is already added to phonebook, replace the old number with a new one?`
         )
       ) {
-        personService.update(
-          persons.filter((person) => person.name === newName)[0].id,
-          addedPerson
-        );
+        personService
+          .update(
+            persons.filter((person) => person.name === newName)[0].id,
+            addedPerson
+          )
+          .catch((err) => {
+            setNotificationMessage(
+              `Information of ${addedPerson.name} has already been removed from the server`
+            );
+            setTimeout(() => {
+              setNotificationMessage(null);
+            }, 2000);
+          });
         setNotificationMessage(`Updated ${addedPerson.name}`);
         setTimeout(() => {
           setNotificationMessage(null);
