@@ -16,7 +16,16 @@ const PersonForm = ({
       number: newNumber,
     };
     if (persons.some((e) => e.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
+      if (
+        window.confirm(
+          `${newName} is already added to phonebook, replace the old number with a new one?`
+        )
+      ) {
+        personService.update(
+          persons.filter((person) => person.name === newName)[0].id,
+          addedPerson
+        );
+      }
     } else {
       personService.create(addedPerson).then((response) => {
         setPersons(persons.concat(response.data));
