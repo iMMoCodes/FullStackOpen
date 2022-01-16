@@ -41,13 +41,22 @@ const PersonForm = ({
         }, 2000);
       }
     } else {
-      personService.create(addedPerson).then((response) => {
-        setPersons(persons.concat(response.data));
-        setNotificationMessage(`Added ${response.data.name}`);
-        setTimeout(() => {
-          setNotificationMessage(null);
-        }, 2000);
-      });
+      personService
+        .create(addedPerson)
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+          setNotificationMessage(`Added ${response.data.name}`);
+          setTimeout(() => {
+            setNotificationMessage(null);
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+          setNotificationMessage(error.response.data.error);
+          setTimeout(() => {
+            setNotificationMessage(null);
+          }, 2000);
+        });
     }
     setNewName('');
     setNewNumber('');
