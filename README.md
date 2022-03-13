@@ -46,3 +46,6 @@
 
 ## <img width=25 src='https://user-images.githubusercontent.com/74028194/156706269-e5c951e5-b8cb-4adc-8bc0-3aea458e8cde.svg'/> *React Native* <img width=25 src='https://user-images.githubusercontent.com/74028194/156706269-e5c951e5-b8cb-4adc-8bc0-3aea458e8cde.svg'/>
 - https://github.com/iMMoCodes/fs-react-native
+
+## :thread: *CI/CD* :thread:
+- https://github.com/iMMoCodes/full-stack-open-pokedex
